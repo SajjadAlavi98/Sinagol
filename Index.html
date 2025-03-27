@@ -3,50 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروش عمده محصولات طبیعی</title>
+    <title>فروش عمده دانه‌های روغنی و محصولات ارگانیک - تماس برای استعلام قیمت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* === تنظیمات کلی === */
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: #f9f9f9;
+        /* تنظیمات پایه */
+        * {
             margin: 0;
             padding: 0;
-            text-align: right; /* متن‌ها راست‌چین */
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* === هدر صفحه === */
-        .header {
-            text-align: center;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            margin-bottom: 2rem;
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
         
-        /* === کارت محصولات === */
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 20px;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* هدر صفحه */
+        header {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .contact-bar {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-item i {
+            color: #4b6cb7;
+            font-size: 18px;
+        }
+        
+        /* بخش محصولات */
+        .products-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #4b6cb7, #182848);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
         }
         
         .product-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
-        /* === تصویر محصول === */
         .product-image {
             height: 200px;
             overflow: hidden;
@@ -57,133 +119,209 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
         
         .product-card:hover .product-image img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
         
-        /* === برچسب قیمت === */
-        .price-ribbon {
-            position: absolute;
-            top: 10px;
-            left: -5px;
-            background: #e74c3c;
-            color: white;
-            padding: 5px 15px;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .product-content {
+            padding: 20px;
         }
         
-        /* === دکمه خرید === */
-        .buy-btn {
-            background: #27ae60;
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .product-description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .contact-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, #4b6cb7, #182848);
             color: white;
-            border: none;
-            padding: 10px 20px;
+            text-align: center;
+            padding: 10px;
             border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
         }
         
-        .buy-btn:hover {
-            background: #2ecc71;
+        .contact-btn:hover {
+            opacity: 0.9;
         }
         
-        /* === انیمیشن‌ها === */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* فوتر */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
         }
         
-        .product-card {
-            animation: fadeIn 0.5s ease-out forwards;
+        .footer-contact {
+            margin-top: 20px;
+        }
+        
+        /* دکمه تماس ثابت */
+        .fixed-contact {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
-    <!-- هدر صفحه -->
-    <div class="header">
-        <h1>محصولات طبیعی و ارگانیک</h1>
-        <p>کیفیت عالی، قیمت مناسب</p>
+    <!-- هدر سایت -->
+    <header>
+        <div class="container">
+            <div class="logo">فروشگاه اینترنتی محصولات طبیعی</div>
+            <p>کیفیت عالی، قیمت مناسب، فروش عمده</p>
+        </div>
+    </header>
+    
+    <!-- نوار تماس -->
+    <div class="contact-bar">
+        <div class="container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>تلفن: 09122805907</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>موبایل: 09336279147</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>ایمیل: Sinagol@gmail.com</span>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <!-- لیست محصولات -->
-    <div class="products-container">
-        <!-- محصول ۱: کنجد ارده -->
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a" alt="کنجد ارده">
-                <div class="price-ribbon">۱۷۸,۰۰۰ تومان</div>
-            </div>
-            <div class="product-content">
-                <h3>کنجد ارده</h3>
-                <p>کنجد مرغوب برای تولید ارده با کیفیت عالی</p>
-                <button class="buy-btn">خرید عمده</button>
+    <!-- بخش محصولات -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">محصولات ما</h2>
+            
+            <div class="products-grid">
+                <!-- محصول 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a" alt="کنجد ارده">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">کنجد ارده</h3>
+                        <p class="product-description">کنجد مرغوب برای تولید ارده با کیفیت عالی و طعم بی‌نظیر</p>
+                        <a href="tel:09212213836" class="contact-btn">تماس برای استعلام قیمت</a>
+                    </div>
+                </div>
+                
+                <!-- محصول 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1604977046806-87f84a8a796f" alt="بادام زمینی کره گیری">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">بادام زمینی کره گیری</h3>
+                        <p class="product-description">بادام زمینی با کیفیت برای تولید کره بادام زمینی خالص و طبیعی</p>
+                        <a href="tel:09212213836" class="contact-btn">تماس برای استعلام قیمت</a>
+                    </div>
+                </div>
+                
+                <!-- محصول 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1615368144592-6a8a1ff6f0b7" alt="روغن ارده">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">روغن ارده</h3>
+                        <p class="product-description">روغن ارده خالص و طبیعی که مستقیماً از ارده به دست می‌آید</p>
+                        <a href="tel:09212213836" class="contact-btn">تماس برای استعلام قیمت</a>
+                    </div>
+                </div>
+                
+                <!-- محصول 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1580060839134-75a5ed7f1f34" alt="گلاب سنتی کاشان">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">گلاب سنتی کاشان</h3>
+                        <p class="product-description">گلاب سنتی تولید شده در شهر کامو از توابع قمصر کاشان</p>
+                        <a href="tel:09212213836" class="contact-btn">تماس برای استعلام قیمت</a>
+                    </div>
+                </div>
+                
+                <!-- محصول 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1603569299800-0245e5f6a9f0" alt="روغن سیاه‌دانه">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">روغن سیاه‌دانه</h3>
+                        <p class="product-description">روغن سیاه‌دانه خالص تولید شده به روش کلدپرس</p>
+                        <a href="tel:09212213836" class="contact-btn">تماس برای استعلام قیمت</a>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- محصول ۲: بادام زمینی کره‌گیری -->
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://images.unsplash.com/photo-1604977046806-87f84a8a796f" alt="بادام زمینی">
-                <div class="price-ribbon">۱۴۵,۰۰۰ تومان</div>
-            </div>
-            <div class="product-content">
-                <h3>بادام زمینی کره‌گیری</h3>
-                <p>مناسب برای تولید کره بادام زمینی خالص</p>
-                <button class="buy-btn">خرید عمده</button>
-            </div>
-        </div>
-        
-        <!-- محصول ۳: روغن ارده -->
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://images.unsplash.com/photo-1615368144592-6a8a1ff6f0b7" alt="روغن ارده">
-                <div class="price-ribbon">۳۴۰,۰۰۰ تومان (کیلویی)</div>
-            </div>
-            <div class="product-content">
-                <h3>روغن ارده</h3>
-                <p>روغن طبیعی و خالص استخراج‌شده از ارده</p>
-                <button class="buy-btn">خرید عمده</button>
+    </section>
+    
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <h3>فروشگاه اینترنتی محصولات طبیعی</h3>
+            <p>ارائه کننده بهترین محصولات ارگانیک و طبیعی</p>
+            <div class="footer-contact">
+                <p><i class="fas fa-phone"></i> 09122805907 </p>
+                <p><i class="fas fa-mobile-alt"></i> 09336279147 </p>
             </div>
         </div>
-        
-        <!-- محصول ۴: گلاب سنتی کاشان -->
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://images.unsplash.com/photo-1580060839134-75a5ed7f1f34" alt="گلاب کاشان">
-                <div class="price-ribbon">تماس بگیرید</div>
-            </div>
-            <div class="product-content">
-                <h3>گلاب سنتی کاشان</h3>
-                <p>تولیدشده در شهر کامو (قمصر کاشان) با روش سنتی</p>
-                <button class="buy-btn">استعلام قیمت</button>
-            </div>
-        </div>
-        
-        <!-- محصول ۵: روغن سیاه‌دانه -->
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://images.unsplash.com/photo-1603569299800-0245e5f6a9f0" alt="روغن سیاه‌دانه">
-                <div class="price-ribbon">تماس بگیرید</div>
-            </div>
-            <div class="product-content">
-                <h3>روغن سیاه‌دانه</h3>
-                <p>تولیدشده به روش کلدپرس از دانه‌های هندی</p>
-                <button class="buy-btn">استعلام قیمت</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // اسکریپت تعاملی دکمه خرید
-        document.querySelectorAll('.buy-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('سفارش شما ثبت شد! به زودی با شما تماس می‌گیریم.');
-            });
-        });
-    </script>
+    </footer>
+    
+    <!-- دکمه تماس ثابت -->
+    <a href="tel:09336279147" class="fixed-contact">
+        <i class="fas fa-phone"></i>
+    </a>
 </body>
 </html>
