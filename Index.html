@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محصولات ویژه - فروش عمده</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            opacity: 0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-content {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .product-description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .buy-btn {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .buy-btn:hover {
+            background: #2ecc71;
+        }
+        
+        /* انیمیشن‌های خاص هر محصول */
+        .product-1 {
+            animation: slideInLeft 1s ease-out 0.2s forwards;
+        }
+        
+        .product-2 {
+            animation: slideInRight 1s ease-out 0.4s forwards;
+        }
+        
+        .product-3 {
+            animation: slideInLeft 1s ease-out 0.6s forwards;
+        }
+        
+        .product-4 {
+            animation: slideInRight 1s ease-out 0.8s forwards;
+        }
+        
+        .product-5 {
+            animation: slideInLeft 1s ease-out 1s forwards;
+        }
+        
+        /* انیمیشن‌های کلی */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* انیمیشن‌های ویژه هر محصول */
+        .product-1 .product-image {
+            background: linear-gradient(45deg, #f39c12, #f1c40f);
+        }
+        
+        .product-1:hover .product-image {
+            animation: sesamePulse 2s infinite;
+        }
+        
+        @keyframes sesamePulse {
+            0% { background: linear-gradient(45deg, #f39c12, #f1c40f); }
+            50% { background: linear-gradient(45deg, #f1c40f, #f39c12); }
+            100% { background: linear-gradient(45deg, #f39c12, #f1c40f); }
+        }
+        
+        .product-2 .product-image {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+        }
+        
+        .product-2:hover .product-image {
+            animation: peanutRotate 3s linear infinite;
+        }
+        
+        @keyframes peanutRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .product-3 .product-image {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        
+        .product-3:hover {
+            animation: oilShine 2s ease-in-out infinite;
+        }
+        
+        @keyframes oilShine {
+            0% { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+            50% { box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4); }
+            100% { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        }
+        
+        .product-4 .product-image {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+        
+        .product-4:hover .product-image img {
+            animation: roseFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes roseFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .product-5 .product-image {
+            background: linear-gradient(45deg, #1abc9c, #16a085);
+        }
+        
+        .product-5:hover .product-image {
+            animation: seedSpin 5s linear infinite;
+        }
+        
+        @keyframes seedSpin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>محصولات ویژه - فروش عمده</h1>
+        <p>کیفیت برتر، قیمت مناسب</p>
+    </div>
+    
+    <div class="products-container">
+        <!-- محصول 1: کنجد ارده -->
+        <div class="product-card product-1">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="کنجد ارده">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">کنجد ارده</h3>
+                <p class="product-description">کنجد مرغوب برای تولید ارده کنجد با کیفیت عالی و طعم بی‌نظیر</p>
+                <div class="product-price">۱۷۸,۰۰۰ تومان</div>
+                <button class="buy-btn">خرید عمده</button>
+            </div>
+        </div>
+        
+        <!-- محصول 2: بادام زمینی کره گیری -->
+        <div class="product-card product-2">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1604977046806-87f84a8a796f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="بادام زمینی کره گیری">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">بادام زمینی کره گیری</h3>
+                <p class="product-description">بادام زمینی با کیفیت برای تولید کره بادام زمینی خالص و طبیعی</p>
+                <div class="product-price">۱۴۵,۰۰۰ تومان</div>
+                <button class="buy-btn">خرید عمده</button>
+            </div>
+        </div>
+        
+        <!-- محصول 3: روغن ارده -->
+        <div class="product-card product-3">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1615368144592-6a8a1ff6f0b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="روغن ارده">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">روغن ارده</h3>
+                <p class="product-description">روغن ارده خالص و طبیعی که مستقیماً از ارده به دست می‌آید، سرشار از خواص درمانی</p>
+                <div class="product-price">۳۴۰,۰۰۰ تومان (کیلویی)</div>
+                <button class="buy-btn">خرید عمده</button>
+            </div>
+        </div>
+        
+        <!-- محصول 4: گلاب سنتی کاشان -->
+        <div class="product-card product-4">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1580060839134-75a5ed7f1f34?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="گلاب سنتی کاشان">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">گلاب سنتی کاشان</h3>
+                <p class="product-description">گلاب سنتی تولید شده در شهر کامو از توابع قمصر کاشان، با آب و هوای سرد و خشک و آسمانی صاف که میزبان رصدخانه ملی ایران است.</p>
+                <div class="product-price">تماس بگیرید</div>
+                <button class="buy-btn">استعلام قیمت</button>
+            </div>
+        </div>
+        
+        <!-- محصول 5: روغن سیاه‌دانه -->
+        <div class="product-card product-5">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1603569299800-0245e5f6a9f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="روغن سیاه‌دانه">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">روغن سیاه‌دانه</h3>
+                <p class="product-description">روغن سیاه‌دانه خالص تولید شده به روش کلدپرس از دانه سیاه‌دانه هندی، با بالاترین کیفیت و خواص درمانی</p>
+                <div class="product-price">تماس بگیرید</div>
+                <button class="buy-btn">استعلام قیمت</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // اسکریپت برای افزودن تعامل بیشتر
+        document.addEventListener('DOMContentLoaded', function() {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // انیمیشن‌های اضافی هنگام اسکرول
+            window.addEventListener('scroll', function() {
+                productCards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if(cardPosition < screenPosition) {
+                        card.style.opacity = '1';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
